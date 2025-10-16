@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sticker Fox</title>
+<style>
+    /* Reset básico */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #fff8f2;
+        color: #333;
+    }
+
+    header {
+        background-color: #ff6f61;
+        color: white;
+        padding: 25px 20px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 2.5em;
+        margin-bottom: 5px;
+    }
+
+    header p {
+        font-size: 1.1em;
+    }
+
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 30px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .product-card {
+        background-color: white;
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .product-card img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .product-card h3 {
+        font-size: 1.2em;
+        margin-bottom: 5px;
+    }
+
+    .product-card p {
+        font-size: 1em;
+        margin-bottom: 10px;
+        color: #ff6f61;
+        font-weight: bold;
+    }
+
+    .product-card button {
+        background-color: #ff6f61;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.95em;
+        transition: background 0.2s;
+    }
+
+    .product-card button:hover {
+        background-color: #e85b50;
+    }
+
+    #cart {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #ff6f61;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #cart span {
+        background: white;
+        color: #ff6f61;
+        border-radius: 50%;
+        padding: 5px 10px;
+        font-weight: bold;
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Sticker Fox</h1>
+    <p>Los stickers más divertidos para vos</p>
+</header>
+
+<div class="products">
+    <div class="product-card">
+        <img src="https://via.placeholder.com/220x220.png?text=Sticker+1" alt="Sticker 1">
+        <h3>Sticker 1</h3>
+        <p>$2</p>
+        <button onclick="addToCart('Sticker 1', 2)">Agregar al carrito</button>
+    </div>
+    <div class="product-card">
+        <img src="https://via.placeholder.com/220x220.png?text=Sticker+2" alt="Sticker 2">
+        <h3>Sticker 2</h3>
+        <p>$3</p>
+        <button onclick="addToCart('Sticker 2', 3)">Agregar al carrito</button>
+    </div>
+    <div class="product-card">
+        <img src="https://via.placeholder.com/220x220.png?text=Sticker+3" alt="Sticker 3">
+        <h3>Sticker 3</h3>
+        <p>$4</p>
+        <button onclick="addToCart('Sticker 3', 4)">Agregar al carrito</button>
+    </div>
+    <div class="product-card">
+        <img src="https://via.placeholder.com/220x220.png?text=Sticker+4" alt="Sticker 4">
+        <h3>Sticker 4</h3>
+        <p>$5</p>
+        <button onclick="addToCart('Sticker 4', 5)">Agregar al carrito</button>
+    </div>
+</div>
+
+<div id="cart" onclick="goToWhatsApp()">
+    🛒 Carrito <span id="cart-count">0</span>
+</div>
+
+<script>
+    let cart = [];
+
+    function addToCart(name, price) {
+        cart.push({name, price});
+        document.getElementById('cart-count').innerText = cart.length;
+        alert(${name} agregado al carrito!);
+    }
+
+    function goToWhatsApp() {
+        if(cart.length === 0) {
+            alert("Tu carrito está vacío.");
+            return;
+        }
+
+        let message = "¡Hola! Quiero comprar los siguientes productos:\n";
+        cart.forEach(item => {
+            message += - ${item.name} ($${item.price})\n;
+        });
+        message += "\nSeguí tu compra por WhatsApp.";
+
+        let url = https://wa.me/50254226643?text=${encodeURIComponent(message)};
+        window.open(url, "_blank");
+    }
+</script>
+
+</body>
+</html>
